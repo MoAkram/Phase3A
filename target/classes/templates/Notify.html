@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Notifications</title>
+</head>
+<body>
+	<div th:if="${GamesNotify}">
+		<th:block th:each="Notify : ${GamesNotify}">
+			a new game<div th:text="${Notify.gameName}">...</div>
+			has been added to <div th:text="${Notify.courseName}">...</div> course
+			<br/> <br/>
+		</th:block>
+	</div>
+	<div th:if="${ComNotifies}">
+		<th:block th:each="Notify : ${ComNotifies}">
+			<div th:text="${Notify.commentorName}">...</div>
+			has commented on <div th:text="${Notify.gameName}">...</div> game
+			<br/> <br/>
+		</th:block>
+	</div>
+</body>
+</html>

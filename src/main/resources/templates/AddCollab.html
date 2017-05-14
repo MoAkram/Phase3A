@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Course Games</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<div th:if="${Users}">
+		<th:block th:each="User : ${Users}">
+			Id :<td th:text="${User.id}">...</td> <br />
+			<td th:text="${User.name}">...</td> <br />
+		</th:block>
+		<form action="#" th:action="@{/AddCollab}"  th:object="${Collaborator}"  method="post">
+			<p> User to be added</p>
+			<input type="number" th:field="*{collabratorId}" />
+
+			<input type="Submit" value="Copy" />
+		</form>
+	</div>
+</body>
+</html>

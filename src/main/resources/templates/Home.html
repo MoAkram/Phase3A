@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Home</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<div th:if="${User} == null">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">LearnCLG</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/SignUp"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="/LogIn"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div th:if="${User}" th:switch="${User.type}">
+		<div th:case="'Teacher'">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">LearnCLG</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="/MyCourses">My Courses</a></li>
+						<li><a href="/Games">Games</a></li>
+						<li><a href="/Courses">Courses</a></li>
+						<li><a href="/CreateCourse">Create Course</a></li>
+						<li><a href="/Notify">Notifications</a></li>
+						<li><a href="/RetiredGames">Retired Games</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li th:inline="text"><a href="LogIn"><span
+								class="glyphicon glyphicon-user"></span> [[${User.getName()}]]</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div th:if="${TeacherGames}">
+			<p>Games you created</p>
+				<th:block th:each="Game : ${TeacherGames}">
+					<tr>
+
+						<a th:href='@{Course/Play/{id}(id=${Game.id})}'>
+							<div th:text="${Game.name}">[[${Game.name}]]</div>
+						</a>
+						<td th:text="${Game.description}">...</td>
+						<br />
+					</tr>
+				</th:block>
+			</div>
+		</div>
+		<div th:case="'Student'">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">LearnCLG</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="/Games">Games</a></li>
+						<li><a href="/Courses">Courses</a></li>
+						<li><a href="/Achievements">My Achievements</a></li>
+						<li><a href="/Notify">Notifications</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li th:inline="text"><a href="/LogIn"><span
+								class="glyphicon glyphicon-user"></span> [[${User.getName()}]]</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+</body>
+</html>
+
+

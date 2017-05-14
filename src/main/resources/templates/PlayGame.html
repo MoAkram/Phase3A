@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>My Courses</title>
+</head>
+<body>
+	<div th:text="${Game.name}">...</div>
+	<br />
+	<br />
+	<p th:if="${result}" th:inline="text">Your answers were</p>
+	<form th:action='@{{id}(id=${Game.id})}' th:object="${wrapper}"
+		method="post">
+		<div th:each="question, stat : ${wrapper.Questions}">
+			<div th:text="${question.getQuestion()}">...</div>
+			<input type="radio" th:field="*{Questions[__${stat.index}__].answer}"
+				value="True" checked="checked" />True <input type="radio"
+				th:field="*{Questions[__${stat.index}__].answer}" value="False"
+				checked="checked" />False <br /> <br />
+		</div>
+		<input type="Submit" name="Submit" /> <br />
+	</form>
+	<div th:if="${creator}">
+		<a th:href='@{/EditGame}'>
+			<p> Edit Game</p>
+		</a> <br /> <a th:href='@{/AddCollab}'>
+			<p> Add Collaborator</p>
+		</a>
+		<a th:href='@{/CancelGame}'>
+			<p>Cancel Game</p>
+		</a>
+	</div>
+	<p th:if="${result}" th:inline="text">The result is [[${result}]]</p>
+	<p th:if="${result}" th:inline="text">
+		<a href="/">Homepage</a>
+	</p>
+	<div th:if="${Comments}">
+		Comments: <br />
+		<div th:each="Comment : ${Comments}">
+			<td th:text="${Comment.name}">...</td> commented
+			<td th:text="${Comment.comment}">...</td> <br /> <br />
+		</div>
+	</div>
+	<a th:href='@{/Course/Comment/{id}(id=${Game.id})}'>
+		<div>Add Comment</div>
+	</a>
+</body>
+</html>

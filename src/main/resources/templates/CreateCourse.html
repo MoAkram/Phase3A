@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1"></meta>
+	<title>New User</title>
+</head>
+<body>
+	<form action="#" th:action="@{/CreateCourse}" th:object="${Course}" method="post">
+		Course Name: <input type="text" name="name" th:field="*{name}" value="courseName"/> <br/>
+		Description: <input type="text"  name="description" th:field="*{description}" value="description"/> <br/>
+		<input type="Submit" name="Submit" />
+	</form>
+	<p th:if="${error}" th:inline="text">Please Provide Valid Data</p>
+</body>
+</html>

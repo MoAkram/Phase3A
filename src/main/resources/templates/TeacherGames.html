@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Course Games</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">LearnCLG</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a th:href="CreateGame">Create Game</a></li>
+				<li th:inline="text"><a>[[${Course.getName()}]]</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			</ul>
+		</div>
+	</nav>
+	<div th:if="${Game}">
+		<form action="#" th:action="@{/Course/CreateGame}"
+			th:object="${wrapper}" method="post">
+			Game Name: <input type="text" th:value="${Game.name}" name="name" />
+			Game Description <input type="text" th:value="${Game.description}"
+				name="description" /> <br />
+			<div th:each="question, stat : ${wrapper.Questions}">
+				Question: <input type="text" minlength="4" name="question"
+					th:field="*{Questions[__${stat.index}__].Question}" /> <input
+					type="radio" name="userType"
+					th:field="*{Questions[__${stat.index}__].answer}" value="True" />True
+				<input type="radio" name="userType"
+					th:field="*{Questions[__${stat.index}__].answer}" value="False" />False
+				<br /> <br />
+			</div>
+			<input type="Submit" name="Submit" />
+		</form>
+	</div>
+	<div th:if="${GamesInCourse}">
+		<th:block th:each="Game : ${GamesInCourse}">
+			<tr>
+
+				<a th:href='@{Play/{id}(id=${Game.id})}'>
+					<div th:text="${Game.name}">[[${Game.name}]]</div>
+				</a>
+				<td th:text="${Game.description}">...</td>
+				<br />
+			</tr>
+		</th:block>
+	</div>
+</body>
+</html>

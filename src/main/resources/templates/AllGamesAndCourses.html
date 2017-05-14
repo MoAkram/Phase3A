@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Games</title>
+</head>
+<body>
+	<div th:if="Courses">
+	<p> Courses</p>
+	<th:block th:each="Course : ${Courses}">
+		<tr>
+			<td th:text="${Course.id}">...</td>
+			<a th:href='@{Course/{id}(id=${Course.id})}'>
+				<td th:text="${Course.name}">...</td>
+			</a>
+			<td th:text="${Course.description}">...</td>
+				<br />	
+			<br />
+		</tr>
+	</th:block>
+	</div>
+	<div th:if="${Games}">
+	<p>Games</p>
+		<th:block th:each="Game : ${Games}">
+			<tr>
+				<td th:text="${Game.id}">...</td>
+				<a th:href='@{/Course/Play/{id}(id=${Game.id})}'>
+					<div th:text="${Game.name}">[[${Game.name}]]</div>
+				</a>
+				<td th:text="${Game.description}">...</td>
+				<br />
+				<br />
+			</tr>
+		</th:block>
+		<p>Copy Option</p>	    
+		<form action="#" th:action="@{/Copygame}"  th:object="${Game}"  method="post">
+			<p> Game ID to be Copied</p>
+			<input type="number" name="id" th:field="*{id}" value="id"/>
+			<p>  Course to be copied to</p>
+			<input type="number" name="courseID" th:field="*{courseID}" value="courseID"/>
+			<input type="Submit" value="Copy" />
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>My Courses</title>
+</head>
+<body>
+	<form th:action="@{/Course/Comment/}" th:object="${Comment}" method="post">
+		<input type="text" th:field="*{comment}" /> <input
+			type="Submit" value="Add Comment" />
+	</form>
+</body>
+</html>

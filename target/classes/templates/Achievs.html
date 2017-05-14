@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>My Achievements</title>
+</head>
+<body>
+	<th:block th:each="Achiev : ${Achievs}">
+		<tr>
+			You scored<div th:text="${Achiev.score}"> [[${Achiev.score}]]</div>
+			in Game No<div th:text="${Achiev.gameId}"> [[${Achiev.score}]]</div>
+			<br />
+		</tr>
+	</th:block>
+
+</body>
+</html>

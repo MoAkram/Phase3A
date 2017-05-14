@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Games</title>
+</head>
+<body>
+	<div th:if="${Games}">
+		<p>Click on game to show older version</p>
+		<th:block th:each="Game : ${Games}">
+			<tr>
+				<td th:text="${Game.id}">...</td>
+				<a th:href='@{/Course/Play/{id}(id=${Game.id})}'>
+					<div th:text="${Game.name}"> [[${Game.name}]]</div>
+				</a>
+				<td th:text="${Game.description}">...</td>
+				<br />
+				<br />
+			</tr>
+		</th:block>
+		<form action="#" th:action="@{/RetiredGames}"  th:object="${Game}"  method="post">
+			<p> Game ID to be restored</p>
+			<input type="number" name="id" th:field="*{id}" value="id"/>
+			<input type="Submit" value="Submit" />
+		</form>
+	</div>
+</body>
+</html>

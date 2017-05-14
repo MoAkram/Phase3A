@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1"></meta>
+	<title>New User</title>
+</head>
+<body>
+	<form action="#" th:action="@{/SignUp}" th:object="${User}" method="post">
+		User Name: <input type="text" minlength="4" name="Name" th:field="*{name}" Value="UserName"/> <br/>
+		Password: <input type="password" minlength="6" name="password" th:field="*{password}" value="password"/> <br/>
+		E-Mail: <input type="email" minlength="6" name="email" th:field="*{mail}" value="email"/> <br/>
+		UserType: <br/>
+		<input type="radio" name="userType" th:field="*{type}" value="Teacher"/>Teacher
+		<input type="radio" name="userType" th:field="*{type}" value="Student"/>Student	<br/>
+		<input type="Submit" name="Submit" />
+	</form>
+	<p th:if="${error}" th:inline="text">Please Provide Valid Data</p>
+</body>
+</html>
